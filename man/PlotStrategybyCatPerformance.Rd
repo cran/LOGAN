@@ -4,8 +4,7 @@
 \alias{PlotStrategybyCatPerformance}
 \title{Check response time by var}
 \usage{
-PlotStrategybyCatPerformance(data, strategy.var, categ.var, namexlab,
-  nameylab)
+PlotStrategybyCatPerformance(data, strategy.var, categ.var, namexlab, nameylab)
 }
 \arguments{
 \item{data}{A \code{matrix} or \code{data.frame}}
@@ -31,11 +30,13 @@ This is a function that reports the number of students and number of actions
 df <- cp025q01.treated
 df$categ <- cut(df$PV1CPRO, c(0, 423, 488, 553, 900))
 df.dataplot <- df[, c("top", "categ")]
-df.dataplot[,1] <- as.factor(df.dataplot[,1])
-df.dataplot[,2] <- as.factor(df.dataplot[,2])
+df.dataplot[, 1] <- as.factor(df.dataplot[, 1])
+df.dataplot[, 2] <- as.factor(df.dataplot[, 2])
 
 # Function demonstration
-m2$PlotStrategybyCatPerformance(df.dataplot, top, categ,
-                                 "Proficiency levels", "Percentage")
+m2$PlotStrategybyCatPerformance(
+  df.dataplot, top, categ,
+  "Proficiency levels", "Percentage"
+)
 
 }

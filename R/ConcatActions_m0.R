@@ -24,19 +24,21 @@
 #' # Function demonstration
 #' df.conc <- m0$ConcatActions(df, c(rlang::quo(event), rlang::quo(event_type)))
 #' names(df)
-#' names(df.conc)  # notice the extra variable in the end
+#' names(df.conc) # notice the extra variable in the end
 #' table(df.conc$event.type)
 #'
 ConcatActions <- function(data, concat.events) {
-    event.type <- NULL # Workaround for "no visible binding for global variable"
-    for (i in seq(length(concat.events))) {
-        events <- concat.events[[i]]
-        if (i == 1) {
-            data <- dplyr::mutate(data, event.type = !!events)
-        } else {
-            data <- dplyr::mutate(data, event.type = paste0(event.type, "_",
-                                                            !!events))
-        }
+  event.type <- NULL # Workaround for "no visible binding for global variable"
+  for (i in seq(length(concat.events))) {
+    events <- concat.events[[i]]
+    if (i == 1) {
+      data <- dplyr::mutate(data, event.type = !!events)
+    } else {
+      data <- dplyr::mutate(data, event.type = paste0(
+        event.type, "_",
+        !!events
+      ))
     }
-    return(data)
+  }
+  return(data)
 }

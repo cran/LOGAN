@@ -35,7 +35,7 @@ df <- m0$TrimVar(df, c("event", "event_type", "diag_state"))
 # Function demonstration
 df.conc <- m0$ConcatActions(df, c(rlang::quo(event), rlang::quo(event_type)))
 names(df)
-names(df.conc)  # notice the extra variable in the end
+names(df.conc) # notice the extra variable in the end
 table(df.conc$event.type)
 
 }

@@ -27,6 +27,6 @@ strategy.
 \examples{
 # Counting the instances of top_setting == 1
 df <- m2$VarActionSearch(cp025q01.treated, "CP025Q01.ACTIONS", "1_apply")
-table(df$freq.1_apply)  # checking results
+table(df$freq.1_apply) # checking results
 
 }

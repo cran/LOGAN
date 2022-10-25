@@ -22,12 +22,15 @@
 #' # Function demonstration
 #' df.clean <- m0$CleanActions(df, event_type, c("ACER_EVENT_" = ""))
 #' table(df$event.type)
-#' table(df.clean$new.event.type)  # cleaned version
+#' table(df.clean$new.event.type) # cleaned version
 #'
 CleanActions <- function(data, event.type, clear.events) {
-    event.type <- rlang::enquo(event.type)
-    data <- dplyr::mutate(data,
-                          new.event.type = stringr::str_replace_all(!!event.type,
-                                                                    clear.events))
-    return(data)
+  event.type <- rlang::enquo(event.type)
+  data <- dplyr::mutate(data,
+    new.event.type = stringr::str_replace_all(
+      !!event.type,
+      clear.events
+    )
+  )
+  return(data)
 }

@@ -3,3 +3,5 @@
 export(m0)
 export(m1)
 export(m2)
+importFrom(methods,is)
+importFrom(modules,module)

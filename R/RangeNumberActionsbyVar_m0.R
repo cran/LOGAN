@@ -14,29 +14,31 @@
 #'   and number de actions (min-max) aggregated by a specific variable.
 #' @examples
 #' m0$RangeNumberActionsbyVar(cp025q01.treated, NewID, CNT, save.table = FALSE)
-#' 
+#'
 RangeNumberActionsbyVar <- function(data, id.var, var.group, save.table = TRUE) {
-    `%>%` <- magrittr::`%>%`  # Placeholder before removal of pipes
-    n.event <- NULL # Works around the "no visible binding for global variable" note
-    id.var <- rlang::enquo(id.var)
-    var.group <- rlang::enquo(var.group)
+  `%>%` <- magrittr::`%>%` # Placeholder before removal of pipes
+  n.event <- NULL # Works around the "no visible binding for global variable" note
+  id.var <- rlang::enquo(id.var)
+  var.group <- rlang::enquo(var.group)
 
-    n.event.var <- data %>%
-        dplyr::group_by(!!var.group, !!id.var) %>%
-        dplyr::summarize(n.event = dplyr::n()) %>%
-        dplyr::group_by(!!var.group) %>%
-        dplyr::summarize("Total N" = dplyr::n(),
-                         "Min" = min(n.event),
-                         "Average" = mean(n.event),
-                         "SD" = stats::sd(n.event),
-                         "Median" = stats::median(n.event),
-                         "Max" = max(n.event))
-    n.event.var <- as.data.frame(n.event.var)
+  n.event.var <- data %>%
+    dplyr::group_by(!!var.group, !!id.var) %>%
+    dplyr::summarize(n.event = dplyr::n()) %>%
+    dplyr::group_by(!!var.group) %>%
+    dplyr::summarize(
+      "Total N" = dplyr::n(),
+      "Min" = min(n.event),
+      "Average" = mean(n.event),
+      "SD" = stats::sd(n.event),
+      "Median" = stats::median(n.event),
+      "Max" = max(n.event)
+    )
+  n.event.var <- as.data.frame(n.event.var)
 
-    if (save.table) {
-        return(n.event.var)
-    } else {
-        message("Summary of number of events by country - Individual level\n")
-        pander::pandoc.table(n.event.var,split.tables = 100)
-    }
+  if (save.table) {
+    return(n.event.var)
+  } else {
+    message("Summary of number of events by country - Individual level\n")
+    pander::pandoc.table(n.event.var, split.tables = 100)
+  }
 }

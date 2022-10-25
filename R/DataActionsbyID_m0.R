@@ -26,19 +26,19 @@
 #' m0$DataActionsbyID(df, id, new.event.type, "actions")
 #'
 DataActionsbyID <- function(data, id.var, event.var, name.var.action) {
-    `%>%` <- magrittr::`%>%`  # Placeholder before removal of pipes
-    `:=` <- rlang::`:=`  # Placeholder before removal of quasiquotation
+  `%>%` <- magrittr::`%>%` # Placeholder before removal of pipes
+  `:=` <- rlang::`:=` # Placeholder before removal of quasiquotation
 
-    id.var <- rlang::enquo(id.var)
-    event.var <- rlang::enquo(event.var)
+  id.var <- rlang::enquo(id.var)
+  event.var <- rlang::enquo(event.var)
 
-    var_actions <- data %>%
-        dplyr::group_by(!!id.var) %>%
-        dplyr::mutate(!!name.var.action := paste0((!!event.var),
-                                                  collapse = " | "))  %>%
-        dplyr::select( -!!event.var) %>%
-        dplyr::filter(dplyr::row_number(!!id.var) == 1)
+  var_actions <- data %>%
+    dplyr::group_by(!!id.var) %>%
+    dplyr::mutate(!!name.var.action := paste0((!!event.var),
+      collapse = " | "
+    )) %>%
+    dplyr::select(-!!event.var) %>%
+    dplyr::filter(dplyr::row_number(!!id.var) == 1)
 
-    return(var_actions)
+  return(var_actions)
 }
-

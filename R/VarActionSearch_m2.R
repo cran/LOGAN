@@ -16,21 +16,27 @@
 #' @examples
 #' # Counting the instances of top_setting == 1
 #' df <- m2$VarActionSearch(cp025q01.treated, "CP025Q01.ACTIONS", "1_apply")
-#' table(df$freq.1_apply)  # checking results
+#' table(df$freq.1_apply) # checking results
 #'
 VarActionSearch <- function(data, action.var, actions.search) {
-    for (i in seq(length(actions.search))) {
-        if (i == 1) {
-            data.actionSearch <- stringr::str_count(data[[action.var]],
-                                                    actions.search[i])
-        } else {
-            data.actionSearch <- cbind(data.actionSearch,
-                                       stringr::str_count(data[[action.var]],
-                                                          actions.search[i]))
-        }
+  for (i in seq(length(actions.search))) {
+    if (i == 1) {
+      data.actionSearch <- stringr::str_count(
+        data[[action.var]],
+        actions.search[i]
+      )
+    } else {
+      data.actionSearch <- cbind(
+        data.actionSearch,
+        stringr::str_count(
+          data[[action.var]],
+          actions.search[i]
+        )
+      )
     }
-    data.actionSearch <- as.data.frame(data.actionSearch)
-    names(data.actionSearch) <- paste0("freq.", actions.search)
-    data <- cbind(as.matrix.data.frame(data), data.actionSearch)
-    return(data)
+  }
+  data.actionSearch <- as.data.frame(data.actionSearch)
+  names(data.actionSearch) <- paste0("freq.", actions.search)
+  data <- cbind(as.matrix.data.frame(data), data.actionSearch)
+  return(data)
 }

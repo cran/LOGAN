@@ -11,11 +11,12 @@
 #' vector.time <- c("CP025Q01.END", "CP025Q01.START")
 #' m1$NumericTimeVar(cp025q01.treated, vector.time)
 #'
-NumericTimeVar <- function(data, vector.time){
-    for (i in seq(length(vector.time))) {
-        if (class(data[[vector.time[i]]]) == "factor") {
-            data[[vector.time[i]]] <- as.numeric(levels(data[[vector.time[i]]]))[data[[vector.time[i]]]]
-        }
+#' @importFrom methods is
+NumericTimeVar <- function(data, vector.time) {
+  for (i in seq(length(vector.time))) {
+    if (methods::is(data[[vector.time[i]]], "factor")) {
+      data[[vector.time[i]]] <- as.numeric(levels(data[[vector.time[i]]]))[data[[vector.time[i]]]]
     }
-    return(data)
+  }
+  return(data)
 }

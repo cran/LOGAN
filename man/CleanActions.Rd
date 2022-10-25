@@ -34,6 +34,6 @@ df <- m0$ConcatActions(df, c(rlang::quo(event), rlang::quo(event_type)))
 # Function demonstration
 df.clean <- m0$CleanActions(df, event_type, c("ACER_EVENT_" = ""))
 table(df$event.type)
-table(df.clean$new.event.type)  # cleaned version
+table(df.clean$new.event.type) # cleaned version
 
 }
